@@ -1,0 +1,13 @@
+
+SSH or Secure Shell is a network communication protocol that enables two computers to communicate and share data.
+The communication between the two computers is encrypted meaning that it is suitable for use on insecure networks.
+Uses SFTP for data transfer
+For authentication Uses public or private key
+
+SFTP (SSH File Transfer Protocol) is a secure FTP protocol that sends files using SSH (secure shell). Data transfer is encrypted. 
+It also offers several ways to authenticate a connection—with a user SFTP (SSH File Transfer Protocol) is a secure FTP protocol that sends files over secure shell (SSH), providing a high level of protection for file transfers.
+For authentication uses username and password  or SSH key or password and SSH key.
+
+FTP uses transmission control protocol (TCP). No Data encrpytion is there.
+
+IAM is used to control who is authenticated (signed in) and authorized (has permissions) to use resources.

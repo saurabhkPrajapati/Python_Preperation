@@ -1,0 +1,28 @@
+26-10-21, 05:15:05 | Error: <class 'pyodbc.IntegrityError'> | Filename: main.py | Line No: 91 | ('23000', "[23000] [Microsoft][ODBC SQL Server Driver][SQL Server]Violation of PRIMARY KEY constraint 'PK__statusTa__CD01726EB2FBF4EB'. Cannot insert duplicate key in object 'dbo.statusTable'. The duplicate key value is (000FLAG). (2627) (SQLExecDirectW); [23000] [Microsoft][ODBC SQL Server Driver][SQL Server]The statement has been terminated. (3621)")
+
+----------------------------------------------------------
+
+26-10-21, 05:15:12 | Error: Program Terminated
+
+----------------------------------------------------------
+
+26-10-21, 05:16:21 | Error: <class 'pyodbc.IntegrityError'> | Filename: main.py | Line No: 91 | ('23000', "[23000] [Microsoft][ODBC SQL Server Driver][SQL Server]Violation of PRIMARY KEY constraint 'PK__statusTa__CD01726EB2FBF4EB'. Cannot insert duplicate key in object 'dbo.statusTable'. The duplicate key value is (000FLAG). (2627) (SQLExecDirectW); [23000] [Microsoft][ODBC SQL Server Driver][SQL Server]The statement has been terminated. (3621)")
+
+----------------------------------------------------------
+
+26-10-21, 05:18:01 | Error: <class 'pyodbc.IntegrityError'> | Filename: main.py | Line No: 91 | ('23000', "[23000] [Microsoft][ODBC SQL Server Driver][SQL Server]Violation of PRIMARY KEY constraint 'PK__statusTa__CD01726EB2FBF4EB'. Cannot insert duplicate key in object 'dbo.statusTable'. The duplicate key value is (000FLAG). (2627) (SQLExecDirectW); [23000] [Microsoft][ODBC SQL Server Driver][SQL Server]The statement has been terminated. (3621)")
+
+----------------------------------------------------------
+
+28-10-21, 05:16:27 | Error: <class 'TypeError'> | Filename: main.py | Line No: 552 | object of type 'int' has no len()
+
+----------------------------------------------------------
+
+28-10-21, 05:21:47 | Error: <class 'TypeError'> | Filename: main.py | Line No: 552 | object of type 'int' has no len()
+
+----------------------------------------------------------
+
+08-11-21, 02:34:33 | Error: <class 'pyodbc.IntegrityError'> | Filename: main.py | Line No: 91 | ('23000', "[23000] [Microsoft][ODBC SQL Server Driver][SQL Server]Violation of PRIMARY KEY constraint 'PK__statusTa__CD01726EB2FBF4EB'. Cannot insert duplicate key in object 'dbo.statusTable'. The duplicate key value is (000FLAG). (2627) (SQLExecDirectW); [23000] [Microsoft][ODBC SQL Server Driver][SQL Server]The statement has been terminated. (3621)")
+
+----------------------------------------------------------
+

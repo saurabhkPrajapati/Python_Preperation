@@ -1,0 +1,15 @@
+2024-05-10 17:44:29,697 - DEBUG - Debug message from Logger_1
+2024-05-10 17:44:29,697 - DEBUG - Debug message from Logger_2
+2024-05-10 17:44:29,700 - DEBUG - Debug message from Logger_1
+2024-05-10 17:44:29,701 - DEBUG - Debug message from Logger_2
+2024-05-10 17:44:38,056 - DEBUG - Debug message from Logger_1
+2024-05-10 17:44:38,056 - DEBUG - Debug message from Logger_2
+2024-05-10 17:44:38,059 - DEBUG - Debug message from Logger_1
+2024-05-10 17:44:38,061 - DEBUG - Debug message from Logger_2
+2024-05-10 17:44:46,836 - DEBUG - Debug message from Logger_2
+2024-05-10 17:44:46,836 - DEBUG - Debug message from Logger_1
+2024-05-10 17:44:46,839 - DEBUG - Debug message from Logger_1
+2024-05-10 17:44:46,839 - DEBUG - Debug message from Logger_2
+2024-05-13 09:31:03,001 - DEBUG - Debug message from Logger_1
+2024-05-13 09:31:03,002 - DEBUG - Debug message from Logger_1
+2024-05-13 09:31:03,002 - DEBUG - Debug message from Logger_2

@@ -1,0 +1,59 @@
+1) What are the advantages of DBMS over traditional file-based systems? 
+
+ 1. Data redundancy 
+ 2. Inconsistency 
+ 3. Concurrent access by multiple users 
+ 4. Security problems
+ 5. Data isolation – multiple files and formats 
+ 
+
+>> There can be multiple unique constrainst in one table
+
+ACID >>
+
+ Atomicity: The entire transaction takes place at once or doesn’t happen at all. There is no midway i.e. transactions do not occur partially.
+
+ Consistency: "Correctness of a database". This encures that database must satisfy integrity constraint before and after transaction.
+	      a = 10
+	      b = 5
+	      a to b = 2
+	      10 + 5 = 8 +7 
+
+ Isolation: This property ensures that multiple transactions can occur concurrently without interfering with each other.
+
+ Durability: This property ensures that once the transaction has completed execution, the updates and modifications to the database will persist even if a system failure occurs.
+
+Database normalization: reduce data redundancy and inconsistency
+
+1NF: In table each  cell contains only one value
+
+2NF:  All non-key attributes are fully dependent on a single primary key , not on part of primary key.( there  will be 2 or more primary key)  
+
+      https://www.geeksforgeeks.org/second-normal-form-2nf/
+
+3NF: A relation will be in 3NF if it is in 2NF and not contain any transitive dependency.(Non-prime attributes should not depend on other non-prime attributes in a table)
+
+     https://www.tutorialspoint.com/explain-3nf-with-an-example-in-dbms
+
+Rollno	Game	Feestructure
+1	Basketball	500
+2	Basketball	500
+3	Basketball	500
+4	Cricket  	600
+5	Cricket	        600
+6	Cricket	        600
+7	Tennis	        400
+
+game-> feestructure. (feestruture depends on game)
+game-> rollno -> feestructure
+
+
+
+
+Anamolies >>
+	Insertion anomaly − A new game can't be inserted into the table unless we get a student to play that game.
+
+	Deletion anomaly − If rollno 7 is deleted from the table we also lost the complete information regarding tennis.
+
+	Updation anomaly −To change the fee structure for basketball we need to make changes in more than one place.
+

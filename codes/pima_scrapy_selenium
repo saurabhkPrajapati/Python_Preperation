@@ -1,0 +1,189 @@
+import scrapy
+from scrapy import Request
+from scrapy.http import HtmlResponse
+from scrapy.utils.response import open_in_browser
+import time
+import re
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+
+class Prima(scrapy.Spider):
+    name = 'prima'
+    temp=1
+    headers = {
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+        'Accept-Encoding': 'gzip, deflate, br', 'Accept-Language': 'en-US,en;q=0.9', 'Cache-Control': 'max-age=0',
+        'Connection': 'keep-alive', 'Content-Type': 'application/x-www-form-urlencoded',
+        'Host': 'www.recorder.pima.gov', 'Origin': 'https://www.recorder.pima.gov',
+        'Referer': 'https://www.recorder.pima.gov/PublicServices/PublicDocView',
+        'sec-ch-ua': '" Not;A Brand";v="99", "Google Chrome";v="91", "Chromium";v="91"', 'sec-ch-ua-mobile': '?0',
+        'Sec-Fetch-Dest': 'document', 'Sec-Fetch-Mode': 'navigate', 'Sec-Fetch-Site': 'same-origin',
+        'Sec-Fetch-User': '?1', 'Upgrade-Insecure-Requests': '1',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+    }
+
+    def start_requests(self):
+        urls = "https://www.recorder.pima.gov/PublicServices/PublicSearch"
+        yield scrapy.Request(
+            url=urls,
+            callback=self.parse,
+            headers=self.headers,
+            dont_filter=True,
+            method="GET"
+        )
+
+    def parse(self, response):
+        driver = webdriver.Chrome(r'C:\Users\Saurabh prajapati\PycharmProjects\selenium\chromedriver.exe')
+        self.driver=driver
+
+
+        self.driver.get(response.url)
+        self.driver.implicitly_wait(6)
+        self.driver.find_element_by_xpath("//div/input[@name='ContentPlaceHolder1_txtStartDate']").click()
+        # not wroking self.driver.find_element_by_xpath("//div/input[@name='ContentPlaceHolder1_txtStartDate']").send_keys(Keys.CONTROL, "a", Keys.BACK_SPACE)
+        self.driver.find_element_by_xpath("//div/input[@name='ContentPlaceHolder1_txtStartDate']").send_keys("6/18/2021")
+        time.sleep(4)
+        self.driver.find_element_by_xpath("//div/input[@name='ContentPlaceHolder1_txtEndDate']").click()
+        # not working self.driver.find_element_by_xpath("//div/input[@name='ContentPlaceHolder1_txtEndDate']").send_keys(Keys.CONTROL, "a", Keys.BACK_SPACE)
+        self.driver.find_element_by_xpath("//div/input[@name='ContentPlaceHolder1_txtEndDate']").send_keys("6/18/2021")
+
+        time.sleep(4)
+        self.driver.find_element_by_tag_name('html').send_keys(Keys.PAGE_DOWN)
+        self.driver.find_element_by_xpath("//input[@name='ctl00$ContentPlaceHolder1$btnDocumentSearch']").click()
+        time.sleep(7)
+        self.driver.find_element_by_xpath("//button[text()='Ok']").click()
+        time.sleep(4)
+        # response=HtmlResponse(url='https://www.recorder.pima.gov/PublicServices/PublicDocView',body=self.driver.page_source.encode('utf-8'))
+        response=HtmlResponse(url='https://www.example.com',body=self.driver.page_source.encode('utf-8'))
+        yield scrapy.Request(
+                    url=self.driver.current_url,
+                    callback=self.parse2,
+                    # formdata=data,
+                    dont_filter=True,
+                    method="POST",
+                    headers=self.headers,
+                    meta={'handle_httpstatus_list': [200]}
+                )
+
+
+    def parse2(self, response):
+        open_in_browser(response)
+        # without open_in_browser viewstate not working
+        # count=3
+        count = 0
+        while count < 51:
+            count += 1
+            viewstate = response.xpath("//input[@id='__VIEWSTATE']/@value").get()
+
+            data = {
+                "__EVENTTARGET": "ctl00$ContentPlaceHolder1$gvDocuments",
+                "__EVENTARGUMENT": f"Page${count}",
+                "__VIEWSTATE": viewstate,
+                "__VIEWSTATEGENERATOR": "26BB63E8",
+                "__SCROLLPOSITIONX": "0",
+                "__SCROLLPOSITIONY": "330",
+                "__VIEWSTATEENCRYPTED": "",
+                "ctl00$ContentPlaceHolder1$hfInstrumentId": "0"
+            }
+
+            yield scrapy.FormRequest(
+                url="https://www.recorder.pima.gov/PublicServices/PublicDocView",
+                callback=self.parse2_,
+                formdata=data,
+                dont_filter=True,
+                method="POST",
+                headers=self.headers,
+                meta={'handle_httpstatus_list': [200]}
+            )
+
+    def parse2_(self, response):
+
+        open_in_browser(response)
+        count = -1
+        while count < 10:
+            count += 1
+
+            viewstate = response.xpath("//input[@id='__VIEWSTATE']/@value").get()
+            data = {
+                "__EVENTTARGET": "ctl00$ContentPlaceHolder1$gvDocuments",
+                "__EVENTARGUMENT": f"Select${count}",
+                "__VIEWSTATE": viewstate,
+                # "__VIEWSTATE":"16zKl9i6S2AIC1vHI3yhskv7kewyRPehsHQgt4ywzcEf05tbYOfLvNg/Pnaj6MFCQSWCG6HeiufxEa19J/FDl65xQGszvj79ge7yBHGUP2i9ICM73e8moh/czNSAR7kmvIT075tt9UFpNsMkF5vhmYRi/PO7tiw4hCaBaTPNZFZFs+v+pTiNr0iz/34ZrWLb9VL/iMtYqvNGLEVySZpnTGWyp9iEmPZUJdk3Pgwmsu6DJ5Cfkuaew7SzavrH+ugRyYjLjVSBRDeWQDmaF8CbagjO+CPFExWha9tDUG+fFNttmiyKv6xR8gMjuWhVkebmPWTah+NUsYtN+8uOipwtd4cAqdAfAbDXwkMj0WNp2jD4keUueVqGVge8V9q3OqrWY6LEVKNHm135aCFvACetAZm8JHXzJuJSgkUKfMebDSqTUwH6xbcNRD4t48dapZ7dmu4Uokh4xzqTLoJHpaQ3Y+wcDukmwvNjTGN8yQa372X7Q3XYTceWuxDWWINIfd5pNrCg6x1I7OUkWQT1bKgX9Tq7XbB5JFjKc9nDlzk2lW2Ss51JdQTMlsmAhLCMtmq/bhIb4ecW9CGZWFJ+U6QFoNbvX0g/BPixpWhxPrMWqpOptrUAQo1jMpD6XR86/MYQR7Ks91o8aojX7H/DPU+AkCRtQjAf7lKBWBsG6rkwOoK0iNcFiLfUBCobh41gJgW3dtSOVoPIYwhQ5+Z99qF4raZnZHrUaE/zp3xVk35SgW8RNjyzhsrii6XL1fz1DTnS7jS8DuVs837zzqyNYYlzFEAmIQpGcRM2Q1ZymFEhCEXIO0+Cy9rhYbrJ16a5dw/aN3PQN0hrNYFNe3s1psAclgrx3DQwa9tjBC5xp4FeWHCHVf5MTGJCseLP8BmR9v+nLKi/mE3r9xd/pf1erL9j/GuLoPvhSPgFickGxWf5/wzxcHrfT8/QBXt8aCbbYs3Ns8kerKs1A1EN/79kjf6hlZu8vmkZnG1dg9ah+CLSDUUxsZASRfBXA4iTrPDQMrFEQP4EhO3+Fjklze6A56uxTKPrWm3JnXGPdovJpY8q9we62zKyo0sWKAPyKFAkpI862Dgh55CnwT9RalP3kcgZ+0caLDn+DLz0napmVP5ooFQrX0NKf0S/8ecTJNwSwVGHXjXvvoMlAq565TkvodrWnkEiNFaRXaM3kZ1a9g6rbk+VUAzSeUE+Yo3nRIsMrupKT98lxm1LgNkrJbWsIEsrWgkt9Mx2FgEIWERr4OVarcybNsl2Kx+i12HMgqgCh1ggKZkH7RdAu7thEdwFSB4KFeQymm6S4O098wUnRG6N9EY9gaZgZcOwjP2VeN+FLoVjuG65/9eKX6/72TWas1bCdgGVjQHxef+Rri7vxIwxVTMEsSsDE9Hp7Om/2XPpDyuYg16dB+hdZgAlGNNRGEtRQkUe+b8ukJf9PulFp0iusRqAo7DazFkm6ISvPOoSUen71X+lZjJls0mS8i/fJ8V61EHFii3YKrPDzTvWjITnPWX6zh3g0oTL0+lQeHWNM1E55YpeQXyicZfe0BqAmIQaYL9scgtS1JKuieLlgJ412Rb4rQ+YHCnsZsG/Jf5JLtX+y4M7s76ZdUgAQ1agi+JyjKBIEyNUerEPzAAIfBdzJHvzt8gjA/Mfu6Z2yE5TzAQzrzfGyX4cAzRm2CY/NPxhOUM2bx6zRsh7r4l0Jsf8rEiw77C7hj+NxCNDS8k2FyLhH3EAc0X+xeTRdCbAPCyt6tskk9we1YwqBBXmwsxEx/ZmS3O9yMTajxMZBNViaoyvxWjOSXJ+82pVKmpQ6MR8x+3uAGb/PhriqCNwW4THscL9KIt+mF0bdzrTSEnrlUH3PXXVpSErVKljxsyuPmkCCQYXOLRVd/QO1drEHmKVyu22aGRzOa/SspIioP81GcyNlNom1x3shb/DfL7jiIzNmfbSV/MynsbNN16ivVOZquYXSFKJ+7h3lrrTKDHjhn4dNkDT3rQsCUJGYnruoSoX+69fKXzhkw4kAfqiVbb1oA5N9yTXk1hxJE4AcxWdgQ2VyKdp91VFoKEqSlUbXd54SHDjULHpPNMcVv9we/v4EMBiRSgUkXYupI8l/i7i/s5wpf2Pp8gEUa0V/ltvktp+4idw1i2S08PPRz/3z8E3wPWTCwFMUrEg9QvxUsik/crI6dckpuul6EIE3y3A22IIRUaMaGvU/nqjT6XHo4QwFMwgtOMac2Hy0rdZec9ejr2rIuQ/0WG+8TZdgv5wETYWg2veJ2PJN+DFlzQe3L17OKlcsMg8uKG5pXe3bsiiNZwCne5ltYrKIy33kfR5Pp/X3oe2MCAwZ/vhOSnPbjSQwkUliaENeB8VzsXcX2wWXZ85ZaNnQOLCERu0H+biQ/a1w0Yz50XkloEd212i/TiBI1aTr/PGhUi1gcEaOo6kTVCMg1lUpU1YFKEQUxSz0eMEggttnD7dp8ra4ORCCY5hfCjl8ms5xQYDcKY/s5oFc5dASSX+KDxNq9a7GRUVa2TZtpwCvlmmqffHReGRKczBBJ7HwjVPI+MMS8F411zQBDF3lbFqCiMAQS3Wt9XJS5GyzOrYvZ+bTZ8FnKyMqW0fIfAxUZKK5Qo3XL8j7leNAB7WVcm+FZhAXGdGTo5cgmLjFw/+meC2Rqzxe5WJRusSqLft5cajDYuni2bLEdRJBKcSPTICsCMiZsJzIniKNkDaBBqbcFgSrKSzCbDa8MCNpYx7oxmRc3LzP+7G5o13oI+A5Zq+tk1H/Hd5WVuRLbmBp6qJmtqdZDlKf6V49Fa0dL7o11cVl+VmorqpJq7lhiYUCf2fq+YlZiSRXv9vOcCXnd5JhAVgc0quf1HkIUoVPllxKKhJG3Oc6H+O66bFo3TM0LUzRLJsUORqpxOTeLWhF4E+g3LyjUaqNQe39ZIWuQB2it+89252aVRlyzui3NzVF+KG3F9ax30iyUNH6fK7mv+a9lzFLFwohFaUnVvWpXVdiht+m8tqLf344FTP7vNwURG5n8vcCV2CepvFgV53nHOGsj8NrJnFBpr1V0PhR3ILQHfO/J4QHmWAPkP3PuUYtQpHs+8K6jbWVJNRoNzAOnHZvZxg9WTpkDUknnSDqDMR4oJOYsl+8WwxVLsv9UYbsMkrFqNI8Mf9XyUbsqTDNCOxHQhSr5ikSeFfm6V0ZLHc3w8IuTCH8GLVMteVYkUiLOUq5kl3oRDcV1r5YsRe9WpcI5d2O6vxSc9CYbFNRU007g56Zs42YmuFX9jH+HWpLmk+QLm4LIidDRetWFAb0lOy4FWKBp5+vL340lvlqr1/tflNwum2moOBQobl710FcXTBi8UzqAUn1FKz4zYhQKS/8Btbg4NNnyWwZhOkeABlau8O74WQMh3r7a4oFRvy0FqDknlatMxEMaoOVlxOTLxVjxU4oLTseTa7mIqig4SpDlFLv833kHH2KrVb8X0Kk6zpYKSoLKBKl6X1d2oxbGwcF5YLlr0srnMfXoSVpgwpgewSNnqhZP7W2kigRFhbapbcEn3ytA9wRDTjxK45uxSE7K4Q8Kek00yK0fA4uJsUj85iU3kF8GT+sClCZpvwZ0Wcfg5/HWgW6Y2MN8/3B70MClbIcCFO2Bbl/vqZRIUuayLqwGGnS0Bm6C4yctoPN3X+VyZVPqkGWZ4Okod9Eq1J6ikXNLBhMLh0olMV1d76ydqKT24Mz6WNB/PkEATogod3vaQQBjzItM/1j1G2Rje8165Vbs7GSJsBRDC/suvR5AtXXui/qOol9/tNa/UyforAhj7ydHJlBSiLG80DCA8NbqBdpUCRZtnfvcdWHtk=",
+                "__VIEWSTATEGENERATOR": "26BB63E8",
+                "__SCROLLPOSITIONX": "0",
+                "__SCROLLPOSITIONY": "417",
+                "__VIEWSTATEENCRYPTED": "",
+                "ctl00$ContentPlaceHolder1$hfInstrumentId": "0"
+            }
+
+            yield scrapy.FormRequest(
+                url="https://www.recorder.pima.gov/PublicServices/PublicDocView",
+                callback=self.parse3,
+                formdata=data,
+                dont_filter=True,
+                method="POST",
+                headers=self.headers,
+                meta={'handle_httpstatus_list': [200]}
+            )
+
+    def parse3(self, response):
+        # open_in_browser(response)
+        Docket = response.xpath("//td[text()='Docket:']/following-sibling::td/text()").get(default='')
+        Page = response.xpath("//td[text()='Page:']/following-sibling::td/text()").get(default='')
+        Pages = response.xpath("//td[text()='Pages:']/following-sibling::td/text()").get(default='')
+        Sequence = response.xpath("//td[text()='Sequence:']/following-sibling::td/text()").get(default='')
+        Recorded = response.xpath("//td[text()='Recorded:']/following-sibling::td/text()").get(default='')
+        Customer_Code = response.xpath("//td[text()='Customer Code:']/following-sibling::td/text()").get(default='')
+        Affidavit = response.xpath("//td[text()='Affidavit:']/following-sibling::td/text()").get(default='')
+        Exemption = response.xpath("//td[text()='Exemption:']/following-sibling::td/text()").get(default='')
+        From = ""
+        for i in range(1, 25):
+            fr = response.xpath(f"(//tr/td[text()='From']){[i]}/following-sibling::td[1]/text()").get(
+                default='') + " " + \
+                 response.xpath(f"(//tr/td[text()='From']){[i]}/following-sibling::td[2]/text()").get(default='')
+            if fr != " ":
+                From = From + "|" + fr
+            From = From.strip('|')
+        To = ""
+        for i in range(1, 25):
+            to = response.xpath(f"(//tr/td[text()='To']){[i]}/following-sibling::td[1]/text()").get(default='') + " " + \
+                 response.xpath(f"(//tr/td[text()='To']){[i]}/following-sibling::td[2]/text()").get(default='')
+            if to != " ":
+                To = To + "|" + to
+
+            To = To.strip('|')
+
+        Cross_Refrence_To_From = response.xpath(
+            "//table[@id='ContentPlaceHolder1_gvCrossReferences']/tbody/tr[2]/td[1]/text()").get(default='')
+        Cross_Refrence_Sequence = response.xpath(
+            "//table[@id='ContentPlaceHolder1_gvCrossReferences']/tbody/tr[2]/td[2]/text()").get(default='')
+        Cross_Refrence_Docket_Page = response.xpath(
+            "//table[@id='ContentPlaceHolder1_gvCrossReferences']/tbody/tr[2]/td[3]/text()").get(default='')
+        Cross_Refrence_Type = response.xpath(
+            "//table[@id='ContentPlaceHolder1_gvCrossReferences']/tbody/tr[2]/td[4]/text()").get(default='')
+        yield {
+            "Docket": Docket.replace("\xa0", ''),
+            "Page": Page.replace("\xa0", ''),
+            "Pages": Pages.replace("\xa0", ''),
+            "Sequence": Sequence.replace("\xa0", ''),
+            "Recorded": Recorded.replace("\xa0", ''),
+            "Customer Code": Customer_Code.replace("\xa0", ''),
+            "Affidavit": Affidavit.replace("\xa0", ''),
+            "Exemption": Exemption.replace("\xa0", ''),
+            "From": From.replace("\xa0", ''),
+            "To": To.replace("\xa0", ''),
+            "Cross Refrence To/From": Cross_Refrence_To_From.replace("\xa0", ''),
+            "Cross Refrence Sequence": Cross_Refrence_Sequence.replace("\xa0", ''),
+            "Docket Page": Cross_Refrence_Docket_Page.replace("\xa0", ''),
+            "Cross Refrence Type ": Cross_Refrence_Type.replace("\xa0", ''),
+
+        }
+
+
+
+
+
+
+
+from scrapy.cmdline import execute
+execute('scrapy crawl prima -o test.csv'.split())

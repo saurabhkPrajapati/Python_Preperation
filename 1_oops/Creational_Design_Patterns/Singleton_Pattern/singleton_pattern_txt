@@ -1,0 +1,3 @@
+Singleton Pattern
+    This pattern ensures that at most one instance of a class exists and provides a global access point to it.
+    It's commonly used for objects like configuration managers, loggers, or thread pools where having a single, centralized instance simplifies access and avoids redundancy.

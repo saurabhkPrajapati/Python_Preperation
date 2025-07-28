@@ -1,0 +1,60 @@
+Creational Design Patterns:
+    These patterns deal with object creation mechanisms, trying to create objects in a manner suitable for the situation.
+    It provides various mechanisms to create objects in a flexible, efficient, and reusable manner.
+    They help to manage the creation of objects, promote code reuse, and enhance maintainability by separating the creation logic from the usage logic.
+    These patterns abstract the instantiation process, allowing the system to be independent of how objects are created, composed, and represented.
+    Creational patterns allow the same construction process to yield different representations/objects/products
+
+Direct Instantiation:
+    Without creational patterns, classes would need to instantiate the objects they work with directly using constructors
+    This tightly couples the class to a specific implementation.
+
+Abstracted Instantiation:
+    With creational patterns, the process of object creation is managed by an intermediary, such as a factory method, builder, or prototype.
+    This intermediary "abstracts" the actual creation process, so the system doesn't need to know how to instantiate specific types of objects.
+    Instead, it interacts with a higher-level API that manages creation.
+
+______________________________________________________________________________________________________________________________________________________________________
+
+concrete class:
+    A concrete class is a class that can be instantiated, meaning you can create objects (instances) of that class.
+    This is in contrast to an abstract class, which cannot be instantiated directly and is typically used as a base class for other classes.
+    A concrete class is a class that can be instantiated and provides implementations for all its methods.
+______________________________________________________________________________________________________________________________________________________________________
+
+Factory Design Pattern:
+    The Factory Design Pattern is a creational design pattern that provides an interface for creating objects in a superclass,
+    allowing subclasses to alter the type of objects that will be created
+
+    This pattern is often implemented using a factory method or a factory class to produce instances of objects based on input criteria or conditions.
+    The factory method offers us the best way to create an object. In this method, objects are created without revealing the logic to the client.
+    To create a new type of object, the client uses the same common interface.
+    Factory patterns allow the creation of objects without specifying the exact class of object that will be created, promoting loose coupling and scalability in code.
+    Hides the concrete class
+______________________________________________________________________________________________________________________________________________________________________
+
+Abstract Factory design pattern:
+    The Abstract Factory design pattern is another creational pattern that uses an interface for creating families of related or dependent objects
+    without specifying their concrete classes.
+    It's an extension of the Factory pattern, where instead of just creating individual objects, the Abstract Factory creates families of related objects.
+______________________________________________________________________________________________________________________________________________________________________
+
+Singleton Pattern:
+    This pattern ensures that at most one instance of a class exists and provides a global access point to it.
+    It's commonly used for objects like configuration managers, loggers, or thread pools where having a single, centralized instance simplifies access and avoids redundancy.
+______________________________________________________________________________________________________________________________________________________________________
+
+Builder pattern:
+    Builder is a creational design pattern that lets you construct complex objects step by step.
+    It separates the construction of an object from its representation so that the same construction process can create different representations.
+______________________________________________________________________________________________________________________________________________________________________
+
+Prototype:
+    The Prototype Design Pattern is a creational pattern that allows you to create new objects by copying (or "cloning") an existing object,
+    called the prototype, instead of instantiating a class directly.
+    This is particularly useful when creating an object is costly or complex, and you want to replicate it with minimal changes.
+
+    Prototype Object: The base object with default attributes and state.
+    Cloning: Creating a new object by duplicating the prototype, often using a clone or copy method.
+    Customization: The cloned object can be customized after cloning to meet specific needs without affecting the prototype.
+______________________________________________________________________________________________________________________________________________________________________

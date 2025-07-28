@@ -1,0 +1,14 @@
+import pandas as pd
+
+# Define a dictionary containing employee data
+data = {'Name': ['Jai', 'Princi', 'Gaurav', 'Anuj'],
+        'Age': [27, 24, 22, 32],
+        'Address': ['Delhi', 'Kanpur', 'Allahabad', 'Kannauj'],
+        'Qualification': ['Msc', 'MA', 'MCA', 'Phd']}
+
+# Convert the dictionary into DataFrame
+df = pd.DataFrame(data)
+
+df.loc[2.5] = ['Z', 10, 5, 7]
+df = df.sort_index().reset_index(drop=True)
+print(df)

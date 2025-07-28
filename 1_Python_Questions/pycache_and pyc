@@ -1,0 +1,7 @@
+pyc:
+    Meaning: Python Compiled
+    It is a compiled version of a Python script. These files are generated to speed up the execution of Python programs by avoiding recompilation.
+
+__pycache__:
+    Meaning: Python Cache
+    It is a directory created by Python to store compiled bytecode files (.pyc files) for Python scripts.

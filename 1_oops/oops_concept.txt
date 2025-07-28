@@ -1,0 +1,82 @@
+Encapsulation:
+    Data Hiding and Protection
+    # It hides the internal details of how an object works and exposing only the necessary info for interacting with it.
+	It refers to the practice of bundling the data (attributes) and methods (functions) that operate on that data into a single unit known as a class.
+	In Python, encapsulation is implemented using access modifiers and properties.
+	Encapsulation purpose: it uses access modifiers with object to ensure data protection.
+
+	Data Hiding: Encapsulation allows the internal state of an object to be hidden from the outside world.
+	The internal data is typically declared as private or protected within the class, which means it cannot be accessed directly from outside the class.
+
+	Access Control: Access to the internal data is provided through public methods (getter and setter methods) defined in the class.
+	These methods control how the data can be accessed and modified, allowing the class to enforce constraints or perform validation before allowing changes to the data.
+
+Abstraction:
+	It hides the internal details of how an object works and exposing only the necessary information for interacting with it.
+	Abstraction process in which data and methods are defined in such a way that only essential details can be seen and
+	unnecessary implementations are hidden is called Data Abstraction.
+	It provides a high-level view of objects, emphasizing "what" an object does rather than "how" it does it.
+
+There are two main types of abstraction in OOP:
+Data abstraction: 
+	Data abstraction focuses on hiding the internal details of data of an object. This means that programmers only need to know the names and types of the object's data not how they are stored in memory.
+	For example, a programmer might use an abstract class to define a car object, which would define properties such as make, model, and year, without specifying how these properties are stored in memory.
+Behavioral abstraction:
+ 	Behavioral abstraction focuses on hiding the implementation details of an object's methods.
+	This means that programmers only need to know what an object's methods do, not how they are implemented. 
+	For example, a programmer might use an abstract class to define a car object, which would define methods such as start(), stop(), and drive(), without specifying how these methods are implemented.
+
+Encapsulation and abstraction both hide internal details but encapsulation also uses access modifiers with object to ensures data protection.
+Encapsulation bundling part implemented automatically.
+
+class variable and method are bound to class State.Means class method can be called without creating an object
+
+instance variable and method are bound to object state. Means instance method can not be called without creating an object
+
+static method is bound to class state. Means static method can be called without creating an object
+
+Abstract Class
+An abstract class can be considered a blueprint for other classes.
+It allows you to create a set of methods that must be created within any child classes built from the abstract class.
+A class that contains one or more abstract methods is called an abstract class.
+An abstract method is a method that has a declaration but does not have an implementation.
+While we are designing large functional units we use an abstract class.
+When we want to provide a common interface for different implementations of a component, we use an abstract class.
+
+______________________________________________________________________________________________________________________________________________________________________
+
+In object-oriented programming (OOP) with Python, methods are functions associated with classes. There are three types of methods commonly used in OOP:
+
+1. **Instance Methods:**
+   - These are the most common type of methods in OOP.
+   - Instance methods are associated with an instance of the class and can access and modify instance attributes.
+   - They are defined using the `def` keyword inside the class and take the instance as the first parameter (usually named `self`).
+
+
+2. **Class Methods:**
+   - Class methods are associated with the class rather than instances.
+   - They are defined using the `@classmethod` decorator and take the class itself as the first parameter (usually named `cls`).
+   - Class methods can access and modify class-level attributes.
+   - Class variables can be accessed from both instance and class method
+
+
+3. **Static Methods:**
+   - Static methods are associated with the class rather than instances, and they don't have access to instance or class attributes.
+   - They are defined using the `@staticmethod` decorator.
+   - Static methods are similar to regular functions but are defined inside the class for better organization.
+   - It simply takes input and returns the output
+
+
+These three types of methods provide flexibility and organization in designing and implementing object-oriented programs in Python.
+Instance methods are used for operations involving instance-specific data,
+class methods for operations involving class-level data,
+Static methods for operations independent of both instance and class data.
+
+______________________________________________________________________________________________________________________________________________________________________
+
+In Python, abstract methods defined in an abstract base class (ABC) serve as a blueprint for what methods
+should be implemented in its subclasses
+
+If a subclass does not implement an abstract method, attempting to instantiate that subclass will raise a TypeError.
+
+______________________________________________________________________________________________________________________________________________________________________

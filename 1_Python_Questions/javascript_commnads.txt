@@ -1,0 +1,14 @@
+const element = document.querySelector('[id*="imgChk"]');
+if (element) {
+element.click();
+}
+
+const elements = document.querySelectorAll('[id*="imgChk"]');
+elements.forEach(element => {
+element.click();
+});
+
+const elements = document.querySelectorAll('[id*="imgChk"]');
+for (let i = 0; i < 500; i++) {
+  elements[i].click();
+}

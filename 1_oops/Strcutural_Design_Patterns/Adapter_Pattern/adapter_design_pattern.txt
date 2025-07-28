@@ -1,0 +1,14 @@
+Adapter Pattern:
+    The Adapter Pattern is a structural design pattern that allows incompatible interfaces to work together by creating
+    a "wrapper" (adapter) that translates one interface to another.
+    This is especially useful when you have existing code or libraries that need to be integrated but do not match the interface expected by your system
+
+Scenario:
+    Using a European Socket with an American Plug
+    Suppose you're in Europe with an American plug device, and European sockets don't directly support it.
+    The Adapter Pattern solves this by creating a "socket adapter" that converts the European socket to work with the American plug.
+
+Implementation in Python
+    Target Interface: EuropeanSocket represents the European standard socket.
+    Adaptee: AmericanPlugDevice represents the incompatible American plug.
+    Adapter: SocketAdapter makes AmericanPlugDevice compatible with EuropeanSocket.

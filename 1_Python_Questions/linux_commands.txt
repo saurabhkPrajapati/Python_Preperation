@@ -1,0 +1,29 @@
+sudo apt install python3-venv
+python3 -m venv oxyzen_venv
+source /home/saurabh/docdateextraction/oxyzen_venv/bin/activate
+
+python -W ignore main.py --state OH --county MEDINAi--start_date 01/10/2022 --end_date 01/10/2022 --concurrency 2 --download_pdf True
+
+rm filename
+
+rm -r folder_name/*
+
+rmdir dirname(empty)
+
+To create new screen:
+screen -S [screenname]
+
+To detach from screen:
+ctrl+a+d
+
+To check the list of screens:
+screen -ls
+
+To open an already created screen:
+screen -r [screenname]
+
+To delete an already created screen:
+screen -XS [screenname] quit
+
+To open an already opened screen:
+screen -r -d [screenname]

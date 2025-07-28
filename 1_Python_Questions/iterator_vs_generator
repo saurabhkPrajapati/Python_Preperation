@@ -1,0 +1,18 @@
+Iterators and generators are both used in Python for lazy evaluation and handling large datasets.
+
+Iterator:
+    An iterator is an object that implements using two methods: __iter__() and __next__().
+    It allows iteration over a collection or a sequence of values, returning one value at a time.
+
+Generator:
+    A generator is a special type of iterator that is implemented using a function and the yield keyword.
+    It automatically creates an iterator object, which yields values one at a time.
+
+
+Generators are generally more efficient than iterators because they do not require
+creating a class with __iter__() and __next__(). It automatically implement the iterator protocol
+
+
+Iterator and generator both are not reusable
+Once an iterator is exhausted (once __next__() raises StopIteration), it cannot be reused.
+You need to create a new instance to iterate over the items again.

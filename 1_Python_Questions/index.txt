@@ -1,0 +1,5 @@
+Indexes are used to quickly locate data without having to search every row in a database table every time the table is accessed
+This data structure contains a sorted list of the values in one or more columns of the table, 
+along with pointers to the rows in the table that contain those values.
+
+B-tree index, Hash index

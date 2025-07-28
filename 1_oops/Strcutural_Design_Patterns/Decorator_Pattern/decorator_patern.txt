@@ -1,0 +1,9 @@
+Decorator Pattern:
+    The Decorator Design Pattern is a structural pattern used to dynamically add behavior or responsibilities to an object at runtime without modifying its structure.
+    This is achieved by wrapping the object with one or more decorators, each providing additional functionality.
+    Open/Closed Principle: the class is open for extension but closed for modification.
+
+Key Concepts
+    Component Interface: Defines the common interface for objects and their decorators.
+    Concrete Component: The main object to which functionalities are added dynamically.
+    Decorator: A class that implements the component interface and wraps the concrete component, adding extra behavior.

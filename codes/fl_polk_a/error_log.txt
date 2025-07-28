@@ -1,0 +1,131 @@
+18-10-21, 03:06:26 | Error: <class 'selenium.common.exceptions.ElementNotInteractableException'> | Filename: main.py | Line No: 231|Message: element not interactable
+  (Session info: chrome=94.0.4606.71)
+
+
+----------------------------------------------------------
+
+18-10-21, 03:07:35 | Error: <class 'pyodbc.IntegrityError'> | Filename: main.py | Line No: 44|('23000', "[23000] [Microsoft][ODBC SQL Server Driver][SQL Server]Violation of PRIMARY KEY constraint 'PK__statusTa__CD01726EB2FBF4EB'. Cannot insert duplicate key in object 'dbo.statusTable'. The duplicate key value is (polk). (2627) (SQLExecDirectW); [23000] [Microsoft][ODBC SQL Server Driver][SQL Server]The statement has been terminated. (3621)")
+
+----------------------------------------------------------
+
+18-10-21, 03:25:24 | Error: <class 'pyodbc.IntegrityError'> | Filename: main.py | Line No: 44|('23000', "[23000] [Microsoft][ODBC SQL Server Driver][SQL Server]Violation of PRIMARY KEY constraint 'PK__statusTa__CD01726EB2FBF4EB'. Cannot insert duplicate key in object 'dbo.statusTable'. The duplicate key value is (polk). (2627) (SQLExecDirectW); [23000] [Microsoft][ODBC SQL Server Driver][SQL Server]The statement has been terminated. (3621)")
+
+----------------------------------------------------------
+
+18-10-21, 03:26:50 | Error: <class 'pyodbc.IntegrityError'> | Filename: main.py | Line No: 44|('23000', "[23000] [Microsoft][ODBC SQL Server Driver][SQL Server]Violation of PRIMARY KEY constraint 'PK__statusTa__CD01726EB2FBF4EB'. Cannot insert duplicate key in object 'dbo.statusTable'. The duplicate key value is (polk). (2627) (SQLExecDirectW); [23000] [Microsoft][ODBC SQL Server Driver][SQL Server]The statement has been terminated. (3621)")
+
+----------------------------------------------------------
+
+18-10-21, 03:30:28 | Error: <class 'pyodbc.IntegrityError'> | Filename: main.py | Line No: 44|('23000', "[23000] [Microsoft][ODBC SQL Server Driver][SQL Server]Violation of PRIMARY KEY constraint 'PK__statusTa__CD01726EB2FBF4EB'. Cannot insert duplicate key in object 'dbo.statusTable'. The duplicate key value is (polk). (2627) (SQLExecDirectW); [23000] [Microsoft][ODBC SQL Server Driver][SQL Server]The statement has been terminated. (3621)")
+
+----------------------------------------------------------
+
+18-10-21, 03:31:53 | Error: <class 'pyodbc.IntegrityError'> | Filename: main.py | Line No: 44|('23000', "[23000] [Microsoft][ODBC SQL Server Driver][SQL Server]Violation of PRIMARY KEY constraint 'PK__statusTa__CD01726EB2FBF4EB'. Cannot insert duplicate key in object 'dbo.statusTable'. The duplicate key value is (polk). (2627) (SQLExecDirectW); [23000] [Microsoft][ODBC SQL Server Driver][SQL Server]The statement has been terminated. (3621)")
+
+----------------------------------------------------------
+
+18-10-21, 03:36:03 | Error: <class 'pyodbc.IntegrityError'> | Filename: main.py | Line No: 44|('23000', "[23000] [Microsoft][ODBC SQL Server Driver][SQL Server]Violation of PRIMARY KEY constraint 'PK__statusTa__CD01726EB2FBF4EB'. Cannot insert duplicate key in object 'dbo.statusTable'. The duplicate key value is (polk). (2627) (SQLExecDirectW); [23000] [Microsoft][ODBC SQL Server Driver][SQL Server]The statement has been terminated. (3621)")
+
+----------------------------------------------------------
+
+18-10-21, 03:37:18 | Error: <class 'pyodbc.IntegrityError'> | Filename: main.py | Line No: 44|('23000', "[23000] [Microsoft][ODBC SQL Server Driver][SQL Server]Violation of PRIMARY KEY constraint 'PK__statusTa__CD01726EB2FBF4EB'. Cannot insert duplicate key in object 'dbo.statusTable'. The duplicate key value is (polk). (2627) (SQLExecDirectW); [23000] [Microsoft][ODBC SQL Server Driver][SQL Server]The statement has been terminated. (3621)")
+
+----------------------------------------------------------
+
+18-10-21, 03:38:00 | Error: <class 'selenium.common.exceptions.NoSuchWindowException'> | Filename: main.py | Line No: 84|Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=94.0.4606.71)
+
+
+----------------------------------------------------------
+
+18-10-21, 03:38:00 | Error: <class 'selenium.common.exceptions.NoSuchWindowException'> | Filename: main.py | Line No: 221|Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=94.0.4606.71)
+
+
+----------------------------------------------------------
+
+18-10-21, 03:38:00 | Error: Program Terminated
+
+----------------------------------------------------------
+
+18-10-21, 03:38:00 | Error: <class 'selenium.common.exceptions.NoSuchWindowException'> | Filename: main.py | Line No: 283|Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=94.0.4606.71)
+
+
+----------------------------------------------------------
+
+18-10-21, 03:39:22 | Error: <class 'pyodbc.IntegrityError'> | Filename: main.py | Line No: 44|('23000', "[23000] [Microsoft][ODBC SQL Server Driver][SQL Server]Violation of PRIMARY KEY constraint 'PK__statusTa__CD01726EB2FBF4EB'. Cannot insert duplicate key in object 'dbo.statusTable'. The duplicate key value is (polk). (2627) (SQLExecDirectW); [23000] [Microsoft][ODBC SQL Server Driver][SQL Server]The statement has been terminated. (3621)")
+
+----------------------------------------------------------
+
+18-10-21, 03:40:13 | Error: <class 'selenium.common.exceptions.NoSuchWindowException'> | Filename: main.py | Line No: 84|Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=94.0.4606.71)
+
+
+----------------------------------------------------------
+
+18-10-21, 03:40:13 | Error: <class 'selenium.common.exceptions.NoSuchWindowException'> | Filename: main.py | Line No: 224|Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=94.0.4606.71)
+
+
+----------------------------------------------------------
+
+18-10-21, 03:40:13 | Error: Program Terminated
+
+----------------------------------------------------------
+
+18-10-21, 03:40:13 | Error: <class 'selenium.common.exceptions.NoSuchWindowException'> | Filename: main.py | Line No: 290|Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=94.0.4606.71)
+
+
+----------------------------------------------------------
+
+18-10-21, 03:41:47 | Error: <class 'pyodbc.IntegrityError'> | Filename: main.py | Line No: 44|('23000', "[23000] [Microsoft][ODBC SQL Server Driver][SQL Server]Violation of PRIMARY KEY constraint 'PK__statusTa__CD01726EB2FBF4EB'. Cannot insert duplicate key in object 'dbo.statusTable'. The duplicate key value is (polk). (2627) (SQLExecDirectW); [23000] [Microsoft][ODBC SQL Server Driver][SQL Server]The statement has been terminated. (3621)")
+
+----------------------------------------------------------
+
+18-10-21, 03:43:59 | Error: <class 'pyodbc.IntegrityError'> | Filename: main.py | Line No: 44|('23000', "[23000] [Microsoft][ODBC SQL Server Driver][SQL Server]Violation of PRIMARY KEY constraint 'PK__statusTa__CD01726EB2FBF4EB'. Cannot insert duplicate key in object 'dbo.statusTable'. The duplicate key value is (polk). (2627) (SQLExecDirectW); [23000] [Microsoft][ODBC SQL Server Driver][SQL Server]The statement has been terminated. (3621)")
+
+----------------------------------------------------------
+
+18-10-21, 03:44:39 | Error: <class 'selenium.common.exceptions.NoSuchWindowException'> | Filename: main.py | Line No: 84|Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=94.0.4606.71)
+
+
+----------------------------------------------------------
+
+18-10-21, 03:44:39 | Error: <class 'selenium.common.exceptions.NoSuchWindowException'> | Filename: main.py | Line No: 225|Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=94.0.4606.71)
+
+
+----------------------------------------------------------
+
+18-10-21, 03:44:39 | Error: Program Terminated
+
+----------------------------------------------------------
+
+18-10-21, 03:44:39 | Error: <class 'selenium.common.exceptions.NoSuchWindowException'> | Filename: main.py | Line No: 290|Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=94.0.4606.71)
+
+
+----------------------------------------------------------
+
+18-10-21, 03:46:39 | Error: <class 'pyodbc.IntegrityError'> | Filename: main.py | Line No: 44|('23000', "[23000] [Microsoft][ODBC SQL Server Driver][SQL Server]Violation of PRIMARY KEY constraint 'PK__statusTa__CD01726EB2FBF4EB'. Cannot insert duplicate key in object 'dbo.statusTable'. The duplicate key value is (polk). (2627) (SQLExecDirectW); [23000] [Microsoft][ODBC SQL Server Driver][SQL Server]The statement has been terminated. (3621)")
+
+----------------------------------------------------------
+
+18-10-21, 03:48:51 | Error: <class 'selenium.common.exceptions.NoSuchElementException'> | Filename: main.py | Line No: 217|Message: no such element: Unable to locate element: {"method":"xpath","selector":"//img[@alt="Trim Notice"]"}
+  (Session info: chrome=94.0.4606.71)
+
+
+----------------------------------------------------------
+

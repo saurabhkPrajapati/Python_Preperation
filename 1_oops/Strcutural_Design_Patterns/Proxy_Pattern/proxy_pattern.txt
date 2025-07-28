@@ -1,0 +1,17 @@
+Proxy Pattern:
+    The Proxy Design Pattern is a structural design pattern that provides a surrogate or placeholder for another object to control access to it.
+    A proxy controls access to the original object, allowing you to perform something either before or after the request gets through to the original object.
+    A proxy can add functionality such as lazy initialization, logging, access control, or caching to the original object without modifying its structure.
+
+
+Benefits of Proxy Pattern:
+    Access Control: Protect sensitive resources.
+    Lazy Initialization: Defer expensive object creation until required.
+    Logging: Track operations for debugging or auditing.
+    Encapsulation: Abstract away the complexity of underlying objects.
+
+Key Use Cases:
+    Remote Proxy: Represents an object in a different address space (e.g., remote servers).
+    Virtual Proxy: Creates expensive objects on demand.
+    Protection Proxy: Controls access to sensitive objects based on permissions.
+    Caching Proxy: Stores results of expensive operations for reuse.
