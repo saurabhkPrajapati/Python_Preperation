@@ -1,8 +1,8 @@
 A routine is a general term for any block of code that can be executed independently of the rest of the program.
-This could include functions, procedures, methods, and even entire programs.
+This could include subroutines, functions, procedures, methods, and even entire programs.
 
 ***Subroutines:
-    Subroutines are sequences of instructions that perform a specific task. It may return one or more values, but does not have to.
+    Subroutines are sequences of instructions that perform a specific task. It may return one or more values, or may not return. It is divided into two tpyes: Function and Procedure
 
 ***Function:
     A function would return the returning value/control to the code or calling function.
@@ -10,7 +10,7 @@ This could include functions, procedures, methods, and even entire programs.
 ***Procedure:
     A procedure, on the other hand, would return the control, but would not return any value to the calling function or the code.
 
-_______________________________________________________________________________________________________________________________________________________________________________
+_________________________________________________________________________________________________________________________________________________________________________
 
 
 ****process***
@@ -19,12 +19,12 @@ Larger and more encompassing. A single process can contain multiple threads that
 
 ***Thread***
 
-A unit of execution within a process. A thread shares the same memory space and resources of the process it belongs to, but it has its own execution stack (keeping track of function calls and local variables).
+A unit of execution within a process. A thread shares the same code with process, memory space and resources(global variables) of the process it belongs to, but it has its own execution stack (keeping track of function calls and local variables).
 Smaller and more lightweight compared to a process. Threads are ideal for handling concurrent tasks within a single program.
 
 ***ProcessPoolExecutor***
 
-ProcessPoolExecutor is non-blocking. It asynchronously executes tasks in separate processes, allowing for concurrent execution of multiple tasks.
+ProcessPoolExecutor is non-blocking. It executes tasks in separate processes, allowing for concurrent execution of multiple tasks.
 This means that while one task is being executed in a process, other tasks can be submitted and executed concurrently in separate processes.
 The main program flow continues without waiting for the tasks to complete, making it non-blocking
 
@@ -33,12 +33,15 @@ Each task submitted to a ProcessPoolExecutor is executed in a separate process, 
 This approach avoids the limitations of the Global Interpreter Lock (GIL) in Python, which prevents true parallel execution of threads due to its interpreter-level lock.
 
 
-________________________________________________________________________________________________________________________________________________________________________________
+_________________________________________________________________________________________________________________________________________________________________________
 
 
 ***Core Concepts in Asyncio***:
+async/await = “You do one task at a time, but smartly switch tasks while waiting (like cooking and answering calls).”
+Good for I/O tasks
 
 Event Loop:
+
     The event loop is the heart of asynchronous programming in Python.
     It continuously monitors events (like completion of I/O operations, timers, etc.) and schedules coroutines to run based on these events.
 Coroutines:

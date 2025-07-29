@@ -11,6 +11,7 @@ async def count():
 
 async def main():
     await asyncio.gather(count(), count(), count())
+    # await count()
 
 
 if __name__ == "__main__":
