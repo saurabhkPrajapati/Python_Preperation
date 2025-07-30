@@ -1,50 +1,31 @@
-import boto3
-from botocore.exceptions import ClientError
+class Animal:
+    def __init__(self, name):
+        self.name = name
 
-# Initialize the SES client
-ses = boto3.client('ses', region_name='us-east-1')  # Change to your region
+    @staticmethod
+    def create(name, kind):
+        if kind == 'dog':
+            return Dog(name)
+        elif kind == 'cat':
+            return Cat(name)
+        else:
+            raise ValueError("Unknown kind of animal.")
 
-def sendEmail(recipients, alarm_server, alarm_type):
-    """
-    Send alert to Global IT and project distribution list
-    """
-    if alarm_type == "disk space":
-        alarm_type = "D Drive Disk space"
-    elif alarm_type == "cpu":
-        alarm_type = "CPU"
-    else:
-        alarm_type = alarm_type.capitalize()
+    def speak(self):
+        return f"{self.name} makes a sound."
 
-    subject = f"{alarm_server} - {alarm_type} above 80%"
-    body_html = f"""<h2>Hello,</h2>
-    <p>The EC2 instance <b>{alarm_server}</b> currently has {alarm_type} utilization above 80%.
-    <br>Please connect to EC2 console to get more details.</p>
-    <p>GlobalIT</p>"""
 
-    # Create the raw email
-    raw_email = f"""From: aws@intellimind.com
-To: {", ".join(recipients)}
-Subject: {subject}
-X-Priority: 1
-Importance: High
-MIME-Version: 1.0
-Content-Type: text/html; charset=UTF-8
+class Dog(Animal):
+    def speak(self):
+        return f"{self.name} says Woof!"
 
-{body_html}
-"""
 
-    try:
-        response = ses.send_raw_email(
-            RawMessage={
-                'Data': raw_email,
-            }
-        )
+class Cat(Animal):
+    def speak(self):
+        return f"{self.name} says Meow!"
 
-    except ClientError as e:
-        print(e.response["Error"]["Message"])
-    else:
-        print("Email sent! Message ID:", response["MessageId"])
+animal1 = Animal.create("Bruno", "dog")
+animal2 = Animal.create("Milo", "cat")
 
-# Example usage
-recipients = ["recipient@example.com"]
-sendEmail(recipients, "my-ec2-instance", "cpu")
+print(animal1.speak())  # Bruno says Woof!
+print(animal2.speak())  # Milo says Meow!

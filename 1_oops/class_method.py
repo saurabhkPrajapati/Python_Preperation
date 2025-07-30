@@ -1,6 +1,8 @@
-# A class method is bound to the class and not the object of the class. It can access only class variables.
-# class variable are shared between objects
-# class variable can be access from instance method and class method
+"""
+A class method is bound to the class and not the object of the class. It can access only class variables.
+class variable are shared between objects
+class variable can be access from instance method and class method
+"""
 
 class Student:
     school_name = 'ABC School'

@@ -1,7 +1,9 @@
-# In Python, abstract methods defined in an abstract base class (ABC) serve as a blueprint for what methods
-# should be implemented in its subclasses
+"""
+In Python, abstract methods defined in an abstract base class (ABC) serve as a blueprint for what methods
+should be implemented in its subclasses
 
-# If a subclass does not implement an abstract method, attempting to instantiate that subclass will raise a TypeError.
+If a subclass does not implement an abstract method, attempting to instantiate that subclass will raise a TypeError.
+"""
 
 from abc import ABC, abstractmethod
 

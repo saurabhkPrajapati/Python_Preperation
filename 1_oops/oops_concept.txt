@@ -19,8 +19,10 @@ Abstraction:
 
 There are two main types of abstraction in OOP:
 Data abstraction: 
-	Data abstraction focuses on hiding the internal details of data of an object. This means that programmers only need to know the names and types of the object's data not how they are stored in memory.
-	For example, a programmer might use an abstract class to define a car object, which would define properties such as make, model, and year, without specifying how these properties are stored in memory.
+	Internal details = How data is stored(memory or database), data type, data name, private/public/protected, how it is validated or modified, 
+	Private and Protected variables provide forced abstraction. And cannot be accessed directly outside the class.
+	Data abstraction focuses on hiding the internal details of data of an object. This means that programmers doesn't know the data/varibale name, data type and how they are stored in memory or databse. The programmer interacts with method defined for interacting with the data. 
+	For example, a programmer might use an abstract class to define a car object, which would define properties such as make, model, and year, without specifying how these properties are stored (in memory or database), what type or what name.
 Behavioral abstraction:
  	Behavioral abstraction focuses on hiding the implementation details of an object's methods.
 	This means that programmers only need to know what an object's methods do, not how they are implemented. 
