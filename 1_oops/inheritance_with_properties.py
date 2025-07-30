@@ -30,3 +30,4 @@ print("\n")
 obj_3 = Student("Mayank", 23, "16-03-2000")
 obj_3.display()
 obj_3.display_info()
+

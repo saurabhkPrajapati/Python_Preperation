@@ -1,6 +1,8 @@
-# program to illustrate protected access modifier in a class
-# protected attributes can be inherited in multilevel inheritance
-# protected attributes of a parent class can be accessed in the grandchild class in Python.
+"""
+program to illustrate protected access modifier in a class
+protected attributes can be inherited in multilevel inheritance
+protected attributes of a parent class can be accessed in the grandchild class or any level of subclassing hierarchy in Python
+"""
 
 
 # super class
