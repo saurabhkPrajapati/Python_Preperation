@@ -1,10 +1,6 @@
 # program to illustrate private access modifier in a class
 
 class Geek:
-    # private members
-    __name = None
-    __roll = None
-    __branch = None
 
     # constructor
     def __init__(self, name, roll, branch):

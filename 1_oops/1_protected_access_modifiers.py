@@ -7,10 +7,6 @@ protected attributes of a parent class can be accessed in the grandchild class o
 
 # super class
 class Student:
-    # protected data members
-    _name = None
-    _roll = None
-    _branch = None
 
     # constructor
     def __init__(self, name, roll, branch):
