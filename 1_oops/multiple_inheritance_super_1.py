@@ -37,3 +37,17 @@ print('--------')
 print(td.tokens)
 print(td.vocab)
 print(td.word_count)
+
+
+"""
+td = TextDescriber('row row row your boat')
+
+This calls TextDescriber.__init__()
+Which calls super().__init__() → goes to WordCounter.__init__()
+WordCounter.__init__() calls super().__init__() → next in MRO is Vocabulary.__init__()
+Vocabulary.__init__() calls super().__init__() → now goes to Tokenizer.__init__()
+
+So Tokenizer.__init__() is called once, as expected. 
+It's just that both WordCounter and Vocabulary inherit from Tokenizer,
+but Python avoids multiple calls to Tokenizer.__init__() due to cooperative multiple inheritance using super()
+"""

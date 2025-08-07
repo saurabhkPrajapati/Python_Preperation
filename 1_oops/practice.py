@@ -1,31 +1,23 @@
-class Animal:
-    def __init__(self, name):
-        self.name = name
+class Circle:
+    def __init__(self, radius=2, **kwargs):
+        print("Circle init")
+        super().__init__(**kwargs)
+        self.radius = radius
 
-    @staticmethod
-    def create(name, kind):
-        if kind == 'dog':
-            return Dog(name)
-        elif kind == 'cat':
-            return Cat(name)
-        else:
-            raise ValueError("Unknown kind of animal.")
+class Square:
+    def __init__(self, side_length=3, **kwargs):
+        print("Square init")
+        super().__init__(**kwargs)
+        self.side_length = side_length
 
-    def speak(self):
-        return f"{self.name} makes a sound."
+class ColoredCircle(Circle, Square):
+    """Initialiazing colour inside ColoredCircle and removing form Circle and Square classes"""
+    def __init__(self, color="Red", **kwargs):
+        print("ColoredCircle init")
+        super().__init__(**kwargs)
+        self.color = color
 
+    def __str__(self):
+        return f"{self.color}, {self.radius}, {self.side_length}"
 
-class Dog(Animal):
-    def speak(self):
-        return f"{self.name} says Woof!"
-
-
-class Cat(Animal):
-    def speak(self):
-        return f"{self.name} says Meow!"
-
-animal1 = Animal.create("Bruno", "dog")
-animal2 = Animal.create("Milo", "cat")
-
-print(animal1.speak())  # Bruno says Woof!
-print(animal2.speak())  # Milo says Meow!
+print(ColoredCircle(radius=5, side_length=10))

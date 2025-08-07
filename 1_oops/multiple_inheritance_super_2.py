@@ -1,50 +1,32 @@
-class Circle:
-    def __init__(self, color, radius):
-        self.color = color
-        self.radius = radius
-
-    def __str__(self):
-        return f"{self.color}, {self.radius}"
+class Tokenizer:
+    def __init__(self, text, **kwargs):
+        print('Tokenizer.__init__()')
+        self.tokens = text.split()
 
 
-class Square:
-    def __init__(self, color, side_length):
-        self.color = color
-        self.side_length = side_length
-
-    def __str__(self):
-        return f"{self.color}, {self.side_length}"
-
-    def check(self):
-        print(self.color)
+class WordCounter(Tokenizer):
+    def __init__(self, text, **kwargs):
+        print('WordCounter.__init__()')
+        super().__init__(text, **kwargs)
+        self.word_count = len(self.tokens)
 
 
-class Rectangle:
-    def __init__(self, length, breadth):
-        self.length = length
-        self.breadth = breadth
-
-    def __str__(self):
-        return f"{self.length}, {self.breadth}"
-
-    def check(self):
-        print(self.length)
+class Vocabulary(Tokenizer):
+    def __init__(self, text, lang='en', **kwargs):
+        print('Vocabulary.__init__()')
+        super().__init__(text, **kwargs)
+        self.lang = lang
+        self.vocab = set(self.tokens)
 
 
-class ColoredCircle(Circle, Square, Rectangle):
-    def __init__(self, color, radius, side_length, length, breadth):
-        super().__init__(color, radius)  # Use super() to call Circle's constructor
-        # Circle.__init__(self, color, radius)  # Use super() to call Circle's constructor
-        Square.__init__(self, color, side_length)  # Use Square to call Square's constructor
-        Rectangle.__init__(self, length, breadth)  # Use Rectangle to call Rectangle's constructor
-        super().check()
-
-    def __str__(self):
-        return f"{self.color}, {self.radius}, {self.side_length}, {self.length}, {self.breadth}"
+class TextDescriber(WordCounter, Vocabulary):
+    def __init__(self, text, **kwargs):
+        print('TextDescriber.__init__()')
+        super().__init__(text, **kwargs)
 
 
-# Example usage
-print(ColoredCircle('black', 2, 4, 5, 6), end="\n\n")
-print(Square('black', 2), end="\n\n")
-print(Circle('black', 2), end="\n\n")
-
+td = TextDescriber("hello hello world", lang="en")
+print('--------')
+print(td.tokens)
+print(td.vocab)
+print(td.word_count)

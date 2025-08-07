@@ -10,8 +10,8 @@ class Person(object):
 # child class
 class Student(Person):
     def __init__(self, name: str = "", age: int = 0, dob: str = "") -> None:
-        super().__init__(name="Rahul", age=age)
-        # super().__init__(name=name, age=age)
+        super().__init__(name="Rahul", age=age) # This is assigming the "Rahul" to name
+        # super().__init__(name, age)
         self.name_1 = name
         self.age_1 = age
         self.dob_1 = dob
