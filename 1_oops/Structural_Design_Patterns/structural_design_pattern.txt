@@ -1,8 +1,26 @@
 Structural Design Patterns:
-    Structural design patterns are design patterns in software development that focus on simplifying relationships and
-    organizing objects and classes into larger structures while keeping them flexible and efficient.
-    These patterns help ensure that elements within a program work together to create a cohesive, reusable, and efficient structure.
+    Structural design patterns are design patterns in software development that focus on organizing classes and objects into larger, cohesive structures,
+    while keeping the system flexible, maintainable, reusable, and efficient.
+    Simplify complex relationships between objects.
+    Facilitate code reuse and reduce tight coupling.
 
+______________________________________________________________________________________________________________________________________________________________________
+
+Common Patterns:
+
+Adapter – Allow incompatible interfaces to work together (wrapper).
+
+Bridge – Separate abstraction from implementation so they can vary independently.
+
+Composite – Compose objects into tree structures to represent part-whole hierarchies.
+
+Decorator – Add new functionality to an object dynamically.
+
+Facade – Provide a simplified interface to a complex subsystem.
+
+Flyweight – Use sharing to support large numbers of similar objects efficiently.
+
+Proxy – Provide a surrogate or placeholder for another object to control access to it.
 ______________________________________________________________________________________________________________________________________________________________________
 
 Adapter Pattern:

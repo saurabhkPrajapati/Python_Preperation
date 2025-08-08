@@ -1,13 +1,18 @@
 Creational Design Patterns:
     These patterns deal with object creation mechanisms, trying to create objects in a manner suitable for the situation.
-    It provides various mechanisms to create objects in a flexible, efficient, and reusable manner.
-    They help to manage the creation of objects, promote code reuse, and enhance maintainability by separating the creation logic from the usage logic.
+    It provides various mechanisms to create objects in a flexible, efficient, maintainable, and reusable manner.
+    They help to manage the creation of objects, promote code reuse, and enhance maintainability by separating the object creation logic from the usage/business logic.
     These patterns abstract the instantiation process, allowing the system to be independent of how objects are created, composed, and represented.
     Creational patterns allow the same construction process to yield different representations/objects/products
+    Avoids tight coupling object creation.
 
 Direct Instantiation:
     Without creational patterns, classes would need to instantiate the objects they work with directly using constructors
     This tightly couples the class to a specific implementation.
+    example:
+    class Test:
+        pass
+    obj = Test()
 
 Abstracted Instantiation:
     With creational patterns, the process of object creation is managed by an intermediary, such as a factory method, builder, or prototype.
@@ -20,6 +25,18 @@ concrete class:
     A concrete class is a class that can be instantiated, meaning you can create objects (instances) of that class.
     This is in contrast to an abstract class, which cannot be instantiated directly and is typically used as a base class for other classes.
     A concrete class is a class that can be instantiated and provides implementations for all its methods.
+______________________________________________________________________________________________________________________________________________________________________
+Common Patterns:
+
+Factory Method – Define an interface for creating an object but let subclasses alter the type of objects that will be created.
+
+Abstract Factory – Provide an interface for creating families of related or dependent objects without specifying their concrete classes.
+
+Singleton – Ensure a class has only one instance and provide a global point of access to it.
+
+Builder – Separate the construction of a complex object from its representation.
+
+Prototype – Clone an existing object instead of creating a new one from scratch.
 ______________________________________________________________________________________________________________________________________________________________________
 
 Factory Design Pattern:

@@ -12,7 +12,7 @@ class WordCounter(Tokenizer):
 
 
 class Vocabulary(Tokenizer):
-    def __init__(self, text, lang='en', **kwargs):
+    def __init__(self, text, lang="spanish", **kwargs):
         print('Vocabulary.__init__()')
         super().__init__(text, **kwargs)
         self.lang = lang
@@ -25,7 +25,7 @@ class TextDescriber(WordCounter, Vocabulary):
         super().__init__(text, **kwargs)
 
 
-td = TextDescriber("hello hello world", lang="en")
+td = TextDescriber("hello hello world", lang="english")
 print('--------')
 print(td.tokens)
 print(td.vocab)

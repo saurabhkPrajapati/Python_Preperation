@@ -1,3 +1,8 @@
+"""
+super().__init__(**kwargs)	calls the next class in MRO, passing remaining keyword arguments
+Enables multiple inheritance so all parent classes can initialize their own attributes
+"""
+
 class Circle:
     def __init__(self, radius=2, **kwargs):
         print("Circle init")
