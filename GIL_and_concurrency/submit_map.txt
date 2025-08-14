@@ -1,0 +1,24 @@
+_________________________SUBMIT_________________________
+Returns: A Future object for each task.
+
+Execution order: Tasks are submitted to the pool and may complete in any order.
+
+Result order: You have to explicitly call future.result() for each Future. 
+              The results come in the order you call .result(), not necessarily in the order tasks completed. 
+              Use reversed(futures) for getting results in reverse input order 
+
+Flexibility: You can cancel, check status, or handle exceptions for each task individually.
+
+Both ThreadPoolExecutor and ProcessPoolExecutor return Future objects when you submit tasks.
+
+You can check completion with future.done(), wait with future.result(), or cancel with future.cancel().
+
+_________________________MAP_________________________
+
+Returns: An iterator of results.
+
+Execution order: Tasks are still submitted concurrently and may finish in any order.
+
+Result order: Always in the order of the input iterable, regardless of which task finishes first.
+
+Simplicity: Cleaner syntax if you just want all results in order.

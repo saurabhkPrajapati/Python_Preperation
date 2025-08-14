@@ -1,0 +1,12 @@
+The Global Interpreter Lock is a mutex (mutual exclusion lock) in CPython (the most common Python interpreter).
+It ensures only one thread executes Python bytecode at a time inside a single process.
+
+CPython’s memory management is not thread-safe by default.
+The GIL simplifies memory access and garbage collection and avoids the need for locks throughout the interpreter.
+
+Even if you have 100 threads in single process, only one can run Python code at any given moment — the others wait their turn
+
+The GIL only blocks Python bytecode execution from running in multiple threads at the same time.
+But when a thread is just waiting for I/O (like network, disk, or database), it’s not executing Python code, so CPython releases the GIL. This allows:
+Another thread to acquire the GIL and execute Python code in the meantime.
+Multiple I/O-bound threads to make progress in parallel — even though only one of them is actively running Python bytecode at a given moment.

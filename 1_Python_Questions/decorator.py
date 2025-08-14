@@ -15,80 +15,33 @@ print(names_and_age(1997, 1986, name1="Titanic", name2="Top Gun"))
 
 
 ####################################################################
-# first decorator will be called first
-# then second decorator will be called
+# take_first_four decorator will be called first
+# then def sum_only_even decorator will be called
 
 
-# First decorator
-def first_decorator(func):
+def take_first_four(func):
     def wrapper(*args, **kwargs):
-        print("First Decorator: Something before the function is called.")
-        result = func(*args, **kwargs)
-        print("First Decorator: Something after the function is called.")
-        return result
-
+        first_four = args[:4]  # Only first 4 positional arguments
+        return func(*first_four, **kwargs)
     return wrapper
 
 
-# Second decorator
-def second_decorator(func):
+def sum_only_even(func):
     def wrapper(*args, **kwargs):
-        print("Second Decorator: Something else before the function is called.")
-        result = func(*args, **kwargs)
-        print("Second Decorator: Something else after the function is called.")
-        return result
-
+        even_numbers = [x for x in args if isinstance(x, int) and x % 2 == 0]
+        return func(*even_numbers, **kwargs)
     return wrapper
 
 
-# Applying nested decorators
-@first_decorator
-@second_decorator
-def my_function():
-    print("My function is called.")
+@sum_only_even
+@take_first_four
+def add_numbers(*nums):
+    return sum(nums)
 
 
-# Call the decorated function
-my_function()
-
-
-# __________________________________________________________________________________________________________________________
-
-def check_even(func):
-    def wrapper(arg):
-        if arg % 2 != 0:
-            raise ValueError(f"The argument {arg} is not even.")
-        return func(arg)
-
-    return wrapper
-
-
-def double_arg(func):
-    def wrapper(arg):
-        return func(arg * 2)
-
-    return wrapper
-
-
-@check_even
-@double_arg
-def process_number(number):
-    return f"Processed number: {number}"
-
-
-# Example usage
-try:
-    result = process_number(4)  # This will double the argument to 8 and then check if it's even
-    print(result)  # Output: Processed number: 8
-except ValueError as e:
-    print(e)
-
-try:
-    result = process_number(3)  # This will double the argument to 6 and then check if it's even
-    print(result)  # Output: Processed number: 6
-except ValueError as e:
-    print(e)  # Output: The argument 3 is not even.
-
+# Test
+print(add_numbers(1, 2, 3, 4, 5, 6, 8))  # 6 (2 + 4 from first four)
+print(add_numbers(10, 12, 14, 15, 16))  # 36 (10 + 12 + 14 from first four)
 
 # _______________________________________________________________________________________________________
 

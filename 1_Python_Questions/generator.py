@@ -1,4 +1,30 @@
-# Generators yield items one at a time, without storing the entire sequence in memory.
+"""
+✅ Memory Efficiency
+Iterators and generators don’t store the whole dataset in memory.
+Example: iterating over a 1 GB log file line by line without loading it entirely.
+
+✅ Lazy Evaluation
+Values are produced only when needed.
+Useful when dealing with infinite sequences or large datasets.
+"""
+
+
+
+"""
+A generator is a special kind of iterator.
+Defined with yield instead of return inside a function, OR created via a generator expression.
+Produces values lazily — generates the next value only when requested.
+Automatically implements the iterator protocol (__iter__) for you.
+"""
+
+
+"""
+Why Generators Are Often Preferred:
+    Less code → fewer bugs.
+    Automatic handling of the iterator protocol.
+    Naturally lazy — doesn’t store entire sequence in memory.
+    Good for pipelines, streaming data, infinite sequences.
+"""
 
 def large_range(n):
     for i in range(n):
@@ -29,10 +55,6 @@ print(next(x))
 print(next(x))
 
 ##################################################################################################
-
-# A generator function in Python is defined like a normal function, but whenever it needs to generate a value,
-# it does so with the yield keyword rather than return. If the body of a def contains yield,
-# the function automatically becomes a Python generator function.
 
 # generator expression
 generator_exp = (i * 5 for i in range(5) if i % 2 == 0)

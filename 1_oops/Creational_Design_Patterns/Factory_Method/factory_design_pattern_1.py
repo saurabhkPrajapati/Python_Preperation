@@ -57,5 +57,5 @@ class PersonFactory:
         return localizers[type_of_person](name, age, hours_or_able)
 
 
-print(PersonFactory().get_person('Worker', 'Ravi', 27, 4))
-print(PersonFactory().get_person('Unemployed', 'Ravi', 27, False))
+print(PersonFactory.get_person('Worker', 'Ravi', 27, 4))
+print(PersonFactory.get_person('Unemployed', 'Ravi', 27, False))

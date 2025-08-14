@@ -1,25 +1,40 @@
-# An iterator in Python is an object that is used to iterate over iterable objects ********************
-# like lists, tuples, dicts, and sets. The Python iterators object is initialized using the iter() method.
-# It uses the next() method for iteration.
+"""
+✅ Memory Efficiency
+Iterators and generators don’t store the whole dataset in memory.
+Example: iterating over a 1 GB log file line by line without loading it entirely.
 
-# __iter__(): initializes the starting point of the iteration and returns the iterator object itself.
+✅ Lazy Evaluation
+Values are produced only when needed.
+Useful when dealing with infinite sequences or large datasets.
+"""
 
-# Memory Efficiency
-# Iterators allow you to work with sequences of data without loading the entire dataset into memory.
-# Instead of creating a list or another collection that stores all items at once, an iterator generates items one at a time.
-# This makes iterators ideal for processing large datasets or streams
-with open('large_file.txt') as file:
+"""
+An iterator in Python is an object that is used to iterate over iterable objects ********************
+like lists, tuples, dicts, and sets. 
+The Python iterators object is initialized using the iter() method.
+It uses the next() method for iteration.
+
+__iter__(): initializes the starting point of the iteration and returns the iterator object itself.
+
+Memory Efficiency
+Iterators allow you to work with sequences of data without loading the entire dataset into memory.
+Instead of creating a list or another collection that stores all items at once, an iterator generates items one at a time.
+This makes iterators ideal for processing large datasets or streams
+"""
+with open('large_file.txt') as file:  #The file object returned by open() in Python implements the iterator protocol:
     for line in file:
         process(line)  # Handle one line at a time
 
-# Lazy Evaluation
-# Iterators compute values on demand (lazily) rather than computing everything upfront.
-# This means that operations are only performed when needed, improving performance for scenarios where only a portion of the data may be consumed.
+"""
+Lazy Evaluation
+Iterators compute values on demand (lazily) rather than computing everything upfront.
+This means that operations are only performed when needed, improving performance for scenarios where only a portion of the data may be consumed.
+"""
 
 for num in range(1_000_000):  # Efficiently handles large ranges
     if num > 10:
         break  # Stops early without generating all numbers
-
+# _______________________________________________________________________________________________________
 
 class Test:
 
@@ -42,13 +57,13 @@ class Test:
 for i in Test(5):
     print(i)
 
-#############################################################
+# _______________________________________________________________________________________________________
 
 v = iter(Test(5))
 for i in v:
     print(i)
 
-#############################################################
+# _______________________________________________________________________________________________________
 
 tup = ('a', 'b', 'c', 'd', 'e')
 
