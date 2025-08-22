@@ -1,13 +1,3 @@
-"""
-Returns: An iterator of results.
-
-Execution order: Tasks are still submitted concurrently and may finish in any order.
-
-Result order: Always in the order of the input iterable, regardless of which task finishes first.
-
-Simplicity: Cleaner syntax if you just want all results in order.
-"""
-
 from concurrent.futures import ThreadPoolExecutor
 import time
 import threading

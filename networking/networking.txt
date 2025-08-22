@@ -1,0 +1,154 @@
+OSI(Open Systems Interconnection) model is a framework that divides the functions of telecommunication into seven layers
+
+Layer 2 (Data link layer)
+Layer 3 (network Layer)
+
+Layer 2:
+    Concepts:
+        Works with MAC addresses (hardware addresses).
+        Provides reliable transfer of frames between devices over a physical link.
+        Switches operate here.
+
+    Traffic/Data Flow:
+        PC1 wants to send data to PC2 (in the same LAN/subnet).
+
+            The data from upper layers (IP packet if Layer 3 is involved, or just raw data if not) is encapsulated into an Ethernet frame.
+            The Ethernet frame contains:
+                Source MAC (PC1’s NIC MAC).
+                Destination MAC (PC2’s NIC MAC).
+                Payload (IP packet or data).
+
+        Finding the MAC (if not known):
+            If PC1 only knows PC2’s IP address, it uses ARP:
+            Sends a broadcast frame: “Who has 192.168.1.2? Tell 192.168.1.1”.
+            All devices in the LAN receive it, but only PC2 replies: “192.168.1.2 is at AA:BB:CC:DD:EE:02”.
+            PC1 now knows PC2’s MAC.
+
+        Switch Behavior:
+            PC1 sends the frame → Switch receives it.
+            The switch reads the destination MAC address in the Ethernet frame.
+            The switch checks its MAC address table (also called CAM table):
+            If entry exists: Forwards frame only to the correct port (unicast).
+            If entry doesn’t exist: Floods the frame to all ports except the source.
+
+        Frame Delivery:
+            The frame is delivered to PC2.
+
+            PC2’s NIC checks the destination MAC.
+                If it matches its own, it accepts the frame and passes the data up to Layer 3 (IP).
+                If not, it discards it.
+
+    Protocols in Layer2:
+        Ethernet (IEEE 802.3):
+            Defines frame format, addressing (MAC), error checking (CRC), and media access (CSMA/CD in older versions).
+
+            Every Ethernet frame has:
+                [ Destination MAC | Source MAC | EtherType | Payload | CRC ]
+
+        ARP (Address Resolution Protocol) – L2 ↔ L3 Boundary
+            Works between Layer 2 and Layer 3.
+            Resolve an IP address (L3) to a MAC address (L2).
+
+        PPP (Point-to-Point Protocol):
+            Provides a standard way to send data between two directly connected nodes/devices (point-to-point).
+            Encapsulation of Data:
+                It takes packets from Layer 3 (like IP) and puts them inside PPP frames for transmission.
+            Provides authentication
+
+        HDLC (High-Level Data Link Control):
+
+________________________________________________________________________________________________
+
+Layer 3:
+
+    Concepts:
+        Works with IP addresses (logical addressing).
+        Provides packet routing between different networks.
+        Determines best path using routing tables.
+        Routers operate here.
+
+    Traffic/Data Flow:
+        Layer 3 packet created: IP source + IP destination + payload.
+
+        PC1 wants to send data to PC2 (in another network).
+
+        PC1 checks if the destination IP is in the same subnet.
+            If same subnet, it sends directly using ARP (Layer 2 help).
+            If different subnet, it sends to the default gateway (Router).
+        
+        Router:
+            Looks at the destination IP in the packet.
+            Consults its routing table.
+            Forwards the packet toward the next hop.
+
+        Packet keeps hopping router-to-router until it reaches the destination network.
+        Each hop rewrites the Layer 2 header (MAC) but keeps the Layer 3 IP header the same.
+
+        At the last hop, ARP resolves the destination IP → MAC, and the packet is delivered.
+
+    Protocols:
+        IPv4 / IPv6 (Internet Protocol).
+        ICMP (ping, error reporting).
+        Routing Protocols (OSPF, BGP, EIGRP, RIP).
+        IPSec for security.
+
+
+        IPv4 / IPv6 (Internet Protocol)
+            Purpose: Provide logical addressing and routing so data can travel across networks.
+
+            IPv4
+                32-bit addresses (about 4.3 billion possible addresses).
+                Written in decimal: 192.168.1.1.
+                Running out of available addresses.
+
+            IPv6
+                128-bit addresses (almost infinite).
+                Written in hexadecimal: 2001:0db8::1.
+                Built-in support for security and better performance.
+
+            Example: When you open a website, your device uses IP to send packets from your computer to the server across multiple networks.
+
+
+        ICMP (Internet Control Message Protocol)
+            Purpose: Used for error reporting and testing connectivity (diagnostic tool).
+            Works alongside IP.
+            Ping uses ICMP to check if a host is reachable.
+            
+            Example messages:
+                Destination Unreachable → Can’t reach the target.
+                Time Exceeded → TTL expired (used by traceroute).
+
+            Example: Running ping google.com → Your PC sends ICMP Echo Requests, and Google replies with ICMP Echo Replies.
+
+        IPSec (Internet Protocol Security)
+            Purpose: Provides encryption, authentication, and integrity for IP traffic.
+            Works at Layer 3 → secures all traffic, regardless of the app.
+            Commonly used for VPNs (Virtual Private Networks).
+
+            Modes:
+                Transport Mode → Secures only the payload (used in host-to-host).
+                Tunnel Mode → Secures entire IP packet (used in site-to-site VPNs).
+
+            Example: When you connect to your office network via VPN, IPSec ensures your data is encrypted and secure over the Internet.
+
+
+________________________________________________________________________________________________
+
+IPv4 (Internet Protocol version 4)
+    Address Size: 32-bit → About 4.3 billion unique addresses (2³²).
+    Format: Written in decimal, dotted notation → 192.168.1.1
+    Header Size: 20 bytes (fixed).
+    Address Exhaustion: Running out of addresses → led to IPv6.
+    Security: IPSec optional.
+    Example Use Today: Still the most common, widely used for the Internet.
+
+IPv6 (Internet Protocol version 6)
+    Address Size: 128-bit → About 3.4 × 10³⁸ unique addresses (virtually unlimited).
+    Format: Written in hexadecimal, colon notation → 2001:0db8:85a3:0000:0000:8a2e:0370:7334(Can be shortened: 2001:db8:85a3::8a2e:370:7334)
+    Header Size: 40 bytes (simplified, fewer fields).
+    Security: IPSec built-in (mandatory).
+    Better Features:
+        No need for NAT (every device can have a public IP).
+        Auto-configuration (stateless address auto-config, SLAAC).
+        Efficient routing.
+

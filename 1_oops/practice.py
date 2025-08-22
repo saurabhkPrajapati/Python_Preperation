@@ -1,34 +1,24 @@
-def check_even(func):
-    def wrapper(*args, **kwargs):
-        args_list = args
-        if args_list[0] % 2 != 0:
-            raise ValueError("Not Div")
-        return func(*args_list)
+def fibonacci(n):
+    n1, n2 = 0, 1
+    count = 0
+    for i in range(n+1):
+        count += 1
+        n1, n2 = n2, n1+n2
+        yield n1
 
-    return wrapper
+# x = fibonacci(10)
+# print(next(x))
+# print(next(x))
+# print(next(x))
 
+def fib(n):
+    if n <= 1:
+        return n
+    if n <= 0:
+        return 0
+    return fib(n-1) + fib(n-2)
 
-def double_arg(func):
-    def wrapper(*args, **kwargs):
-        args_list = args
-        args_list[0] = args_list[0] * 2
-        return func(*args)
-
-    return wrapper
-
-
-@check_even
-@double_arg
-def process_number(number):
-    return [f"Processed number: {number}"]
-
-
-# Example usage
-try:
-    result = process_number(4)  # This will double the arguments to 8 and 12
-    print(result)
-
-    result = process_number(3)  # This will raise a ValueError
-    print(result)
-except ValueError as e:
-    print(e)
+num_terms = 10
+print(f"Fibonacci series up to {num_terms} terms:")
+for i in range(num_terms):
+    print(fib(i), end=" ")

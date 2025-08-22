@@ -1,0 +1,51 @@
+NIC definition:
+    A NIC (Network Interface Card) is the hardware component that connects a computer (or any device) to a network.
+    Each NIC has a unique MAC(Media Access Control) address (like a hardware ID).
+    
+    It can be a physical card (plugged into the motherboard, like Ethernet card) or built-in (like Wi-Fi adapters in laptops).
+    In cloud/virtual machines, NICs are software-defined (called vNICs).
+
+Switch definition:
+    Switch is device that connects multiple devices within a LAN
+    It operates on layer 2 in OSI Model
+    They forward traffic based on MAC addresses (not IP addresses)
+
+_________________________Switch working in Layer 2: _________________________
+
+1) Every NIC(network interface card) has a unique MAC address
+    For example:
+        PC1 → AA:BB:CC:DD:EE:01
+        PC2 → AA:BB:CC:DD:EE:02
+    These are “burned in” at manufacturing time (though they can sometimes be changed in software).
+
+2) Frame creation (Layer 2)
+    When PC1 wants to send data to PC2, it first needs PC2’s MAC address.
+    If PC1 knows only PC2’s IP, it will use ARP (Address Resolution Protocol) to ask “Who has IP 192.168.1.2? Tell 192.168.1.1”.
+    PC2 replies with its MAC address → AA:BB:CC:DD:EE:02.
+    Now PC1 builds an Ethernet frame with:
+        Destination MAC = PC2’s MAC
+        Source MAC = PC1’s MAC
+
+3) Switch behavior
+    The switch receives the frame.
+    It looks at the destination MAC.
+    Using its MAC address table (CAM table), it forwards the frame only to the port where PC2 is connected.
+
+4) Delivery
+    PC2 receives the frame, sees its MAC matches the destination, and processes the data up the stack.
+
+So switches forward traffic inside a LAN by reading MAC addresses (Layer 2).
+
+________________________________________________________________________________________________
+PC1 wants to talk to PC2
+PC1 knows PC2’s IP (192.168.1.2), but doesn’t know the MAC address.
+
+PC1 sends an ARP request as a broadcast frame: Who has 192.168.1.2? Tell 192.168.1.1
+    This means every device in the LAN receives it.
+
+All devices receive the ARP request, but only the device that owns IP 192.168.1.2 (PC2) responds.
+
+PC2 replies directly (unicast) to PC1
+________________________________________________________________________________________________
+
+
