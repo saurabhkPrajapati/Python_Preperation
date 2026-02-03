@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<h1>Admin Dashboard</h1>
+<p>Only Admin and Super Admin can access this page.</p>
+
+<button onclick="loadAdminData()">Check Admin Access</button>
+<button onclick="logout()">Logout</button>
+
+<p id="result"></p>
+
+<script src="/js/auth.js"></script>
+<script>
+function loadAdminData() {
+    authFetch("http://127.0.0.1:5000/admin")
+        .then(res => res.json())
+        .then(data => {
+            result.innerText = data.message || data.error;
+        });
+}
+</script>
+
+</body>
+</html>
