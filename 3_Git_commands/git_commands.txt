@@ -1,0 +1,432 @@
+git config --global user.name </username/>
+
+git config --global user.email </useremail/>
+
+git config --global color.ui auto
+
+git config --global http.sslVerify false
+
+SSL verification is the process of confirming that a website or server's SSL certificate is valid and authentic. 
+SSL stands for Secure Sockets Layer, and SSL certificates are digital certificates that create a secure connection between a server and a client, like a web browser
+
+git clone https://192.168.10.58//saurabh/docdateextraction.git
+
+then do cd to git project and add, commit, push there
+
+____________________________________________________________________________________________________________________
+
+
+Origin: 
+    The name of the remote repository. It's a convention to name the primary remote repository origin, but you can name it anything you like.
+
+Head: 
+    It is reference to the last commit ID of a branch.
+
+Git cases of conflicts are:
+    1. When two separate branches have changes to the same line in a file
+    2. A file is deleted in one branch but has been modified in the other.
+
+
+git config --global --get user.name:
+    To get username in repository
+
+git add -u:
+    for staging only changed files
+
+git commit -am "commit message":
+    for committing only changed files, Adds all modified files to the staging area (index) and committing them
+    with a commit message in one step
+
+git status: 
+    To show the difference between the working directory and the index
+
+Index:
+    The Git index is a staging area where you can gather changes you intend to include in your next commit.
+    When you modify files in your working directory, those changes are not immediately added to your repository.
+    Instead, you first add them to the index
+
+One cannot take a pull if the newly created branch is not pushed on git remote
+
+____________________________________________________________________________________________________________________
+
+
+git remote add origin https://192.168.10.58/saurabh/docdateextraction.git:
+    Adds a new remote repository URL to your local Git repository
+
+git remote show origin:
+    Verify origin urls
+
+git remote -v:
+    Verify origin urls
+
+git branch -M </branch_main/>:
+    Renames the current branch to <branch_main>
+
+For renaming the branch back
+    git branch -m new-branch-name old-branch-name
+    git push origin -u old-branch-name --force
+
+
+git push -u origin main:
+    sets the upstream (tracking) branch for your current branch to </remote-branch/>
+
+git branch --set-upstream-to </remote-branch/>:
+    sets the upstream (tracking) branch for your current branch to </remote-branch/>
+
+git branch --set-upstream-to=origin/</branch/> update_doc:
+    #git set upstream branch
+
+git branch -vv:
+    Verify Upstream Branch
+
+git branch -v:
+    Verify Upstream Branch
+
+____________________________________________________________________________________________________________________
+
+
+delete all commits as well as files changes
+    git fetch --all
+    git reset --hard origin/development
+
+git checkout -b test_branch:
+    we cannot checkout to other branch after making changes and without saving in one branch
+
+git branch branch_name:
+    Create a new branch
+
+git checkout branch_name:
+    Switch to the new branch
+
+
+If you want to base the new branch on a different commit or branch, you can specify it after the branch name:
+    git checkout -b branch_name base_branch
+
+git branch -D local_branch_name
+
+git push remote_name -d remote_branch_name (git push origin -d feature-branch/ for remote repository named origin)
+
+____________________________________________________________________________________________________________________
+
+
+merge commands >>>>>>>>>>>>>>
+    
+    git fetch origin
+    git checkout testcounty
+    git merge --no-ff 'testcounty'
+    git push origin 'development'
+
+
+    when you use git merge --no-ff, an additional merge commit is automatically created, even if the history of the two branches is linear. 
+    This merge commit serves as a marker for the merge operation and contains metadata about the merge, such as:
+
+        The parent commits (both the current branch's tip and the merged branch's tip).
+        The author and timestamp of the merge.
+
+        If testcounty is a direct descendant of main, a fast-forward merge would simply advance the main pointer, 
+        making it appear as though the two branches were always a single linear sequence.
+
+        Without --no-ff: with fast-forward
+
+        *   C (merged)
+        |
+        * B
+        * A
+
+
+        With --no-ff: without fast-forward
+
+        With the merge commit, you can see that testcounty was its own branch with its own work, which was later integrated into main.
+
+        *   C (merge commit)
+        |\
+        | * B
+        | * A
+
+____________________________________________________________________________________________________________________
+
+
+Diverged >>>>>>>>>>>>>>
+
+    When we say that two branches have "diverged" in Git, it means that both branches have progressed independently
+    from a common ancestor, each with their own set of changes.
+    However, if only one branch has changes and the other does not, we generally do not refer to them as diverged;
+    we simply say one branch has additional commits.
+
+    Criteria for Branches to be Called Diverged
+
+    * Common Ancestor: Both branches must have a common commit in their history.
+    * Independent Changes: Both branches have new commits that are not in the other branch, meaning both branches have diverged from the common ancestor in different directions.
+
+
+    Practical Example
+        git init my-repo
+        cd my-repo
+
+        # Create an initial commit on the main branch
+        echo "Initial content" > file.txt
+        git add file.txt
+        git commit -m "Initial commit"
+
+        # Create a new branch 'feature'
+        git checkout -b feature
+
+        # Make changes on the feature branch
+        echo "Feature branch changes" >> file.txt
+        git add file.txt
+        git commit -m "Feature changes"
+
+        # Switch back to the main branch
+        git checkout main
+
+        # Make changes on the main branch
+        echo "Main branch changes" >> file.txt
+        git add file.txt
+        git commit -m "Main changes"
+
+
+        At this point, the branches have diverged:
+            main branch has the commit history: Initial commit -> Main changes
+            feature branch has the commit history: Initial commit -> Feature changes
+
+        In this example, the branches main and feature have diverged because both have changes that are not in the other.
+
+____________________________________________________________________________________________________________________
+
+merge strategy >>>>>>>>>>>>>>
+
+    git merge -s recursive </branch-name/>
+
+    git merge -s ours </branch-name/>  : This strategy keeps the current branch’s content and discards changes from the merged branch
+
+    git merge -X theirs </branch-name/>  : This strategy keeps the content from the merged branch and discards changes from the current branch.
+
+    For simple, non-diverged branches, the default fast-forward merge is used if applicable.
+
+    Fast-Forward Merge: This can only happen if the branch being merged into (in this case, main) has no new commits since the common ancestor.
+    The branch can simply be "fast-forwarded" to include the commits from the other branch.
+
+    Merge Commit: When the branch being merged into has new commits (as main does in this case with commit C), Git creates a merge commit to preserve the history of both branches.
+    No, a merge commit will not be created in a fast-forward merge
+
+
+    Merge Strategies:
+
+        recursive: Default strategy; handles complex merges with multiple common ancestors. For diverged branches
+        
+        resolve: Simpler strategy for two-parent merges. For both diverged and non-diverged branches
+
+        octopus: Handles merging multiple branches.
+
+        ours: Discards changes from the branch being merged in, favoring the current branch.
+
+        theirs: Discards changes from the current branch, favoring the changes from the branch being merged in.
+
+        subtree: Merges nested repositories or projects.
+
+
+    Recursive Merge Strategy:
+    
+        *   Three-Way Merge: The recursive strategy performs a three-way merge  between the two branches that are diverged from their common ancestor.
+        This allows Git to reconcile differences between the branches
+        It compares changes made in both branches since they separated from their common ancestor
+        
+        *   Handles Conflicts: If there are conflicts between the branches, the recursive strategy will attempt to resolve them automatically.
+        If it cannot resolve them, it will prompt you to manually resolve the conflicts.
+        
+        *   Merge Commits: If the merge is successful, Git creates a merge commit that combines the changes from both branches.
+            A recursive merge will create a merge commit if the branches being merged have diverged histories.
+
+
+    Resolve Merge Strategy:
+    
+        *   Two-Parent Merge: The resolve strategy is designed for simpler merges where there are only two branches involved.
+        
+        *   Handles Conflicts: If there are conflicts, the resolve strategy will attempt to resolve them automatically, similar to the recursive strategy. However, it doesn’t handle more complex merge scenarios as well.
+        
+        *   No Multiple Common Ancestors: Unlike recursive, the resolve strategy does not handle scenarios with multiple common ancestors.
+ 
+____________________________________________________________________________________________________________________
+
+adding gitignore >>>>>>>>>>>>>>
+
+    git add .gitignore
+    git commit -m "message"
+
+____________________________________________________________________________________________________________________
+
+git-rename-from-index-lock-to-index-failed >>>>>>>>>>>>>>
+
+    When Git performs operations like git add, git commit, or git merge, it creates a lock file (.git/index.lock) to prevent other processes from modifying the .git/index file simultaneously. If the operation was interrupted (e.g., due to a crash or user cancellation), the .git/index.lock file may remain.
+    del .git\index
+    del .git\index.lock
+
+
+____________________________________________________________________________________________________________________
+
+
+hierarchy git checkout >> git restore >> git reset >> git revert
+    
+    we cannot checkout to other branch after making changes and without saving/stash in one branch
+
+____________________________________________________________________________________________________________________
+
+git reset different modes:
+
+    Soft: Keeps all changes in the staging area (index) and working directory. "Git add" will be kept
+
+    Mixed: Unstages changes from the index (staging area), but keeps them in the working directory.
+
+    Hard: Resets both the staging area and working directory to match the specified commit.
+
+____________________________________________________________________________________________________________________
+
+git reset --mixed head
+
+    It modifies commit history
+    We cannot remove a specific commit with the help of git reset.
+    For ex : we cannot say that we want to remove the second commit or the third commit ,
+    
+    we can only remove the latest commit or latest 2 commits … latest N commits.(HEAD~n) [n here means n recent commits that needs to be deleted].
+
+____________________________________________________________________________________________________________________
+
+For Unstaging:
+
+    git reset </filename/> / git reset head </filename/> : both unstage the changes and "changes persist", writing sof/mixed/hard is not allowed. By default, it is mixed
+
+    git restore --staged <file>: unstage the changes, changes persist
+
+____________________________________________________________________________________________________________________
+
+
+git revert </commit-ID to be removed/>
+
+    The git revert command creates a new commit that introduces changes to reverse the effects of the specified commit (identified by the <commit_id>).
+
+    This new commit is called a revert commit.
+
+    The original commit remains intact in the Git history, both locally and on the remote repository (assuming you push the revert commit).
+
+
+____________________________________________________________________________________________________________________
+
+
+    git restore </file-name/>: can be applied after making changes in working directory, changes are gone,
+
+    git restore --staged </file-name/>: can be applied after adding to index, changes persist
+
+    git stash: can be applied after making changes or after adding to staging area also. Does not file-name. Does not work for commit
+
+    git stash -u: includes untracked files in the stash as well as tracked files.
+
+    git stash apply stash-id
+
+    stash-id (is optional in stash command): Specifies which stash entry to apply. If omitted, the latest stash (stash@{0}) is applied.
+
+    git stash list
+
+    git stash drop stas-id: discard a stash without applying the stashed changes.
+
+    git stash pop stash-id: applies the stashed changes and then removes the stash.
+
+    restore vs stash
+
+    changes are gone || changes are there in (git stash list)
+
+____________________________________________________________________________________________________________________
+
+
+git diff: Show changes between working directory and current changes without add
+    To see changes between the working directory and the index( but are not added, just saved)
+
+git diff --staged: Show changes in the staging area (compared to the last commit)
+     To see changes between the index and the last commit
+
+git diff </commit1/> </commit2/>: 
+    Show changes between two commits
+
+git diff --name-only --diff-filter=U: Command to list conflicts
+    This shows only the files that are in conflict and need to be resolved
+
+
+Index (Staging Area): When you use the git add command, changes from the working directory are added to the index.
+This means that Git is now tracking these changes and they are ready to be committed.
+The index allows you to prepare and review changes before finalizing them in a commit.
+
+____________________________________________________________________________________________________________________
+
+git config pull.rebase false
+
+    Remember that setting pull.rebase to false means that git pull will default to performing a merge when pulling changes from the remote repository,
+    rather than rebasing your changes onto the upstream branch.
+____________________________________________________________________________________________________________________
+
+git rebase </branch-name/>
+
+    The above command will automatically take the commits in your current working branch and apply them to the head of the branch which will be mentioned:
+
+    Git rebase re-applies the commits from the current branch on top of the target branch.
+
+    This can help create a linear project history, making it easier to~~ understand and navigate.
+
+    It does not change the remote repository directly, until the changes are pushed
+
+
+    Example:
+
+        git checkout feature
+
+        git rebase main
+
+        This adds all commits from feature onto the tip of main.
+
+
+____________________________________________________________________________________________________________________
+
+
+git rebase: Running git rebase without any additional arguments will attempt to rebase your current branch onto the upstream branch it is tracking.
+
+git pull --rebase When you use the git pull —rebase command, Git pulls updates from the upstream branhc in remote repository and rebases your current branch on top of upstream branch,
+ thereby applying your local commits on top of the fresh remote updates.
+
+
+As a result, the commit history becomes linear and is simpler to read and comprehend.
+
+Instead of merging the fetched changes into your local branch, it re-applies your local commits on top of the latest fetched commits.
+
+It does not change the remote repository directly, until the changes are pushed
+
+____________________________________________________________________________________________________________________
+
+git pull --rebase origin main
+    
+    Git will fetch changes from the main branch into your local repository.
+    It will rewind your check branch to match the latest main branch state.
+    Then, it will reapply your check branch commits on top of the main branch commits.
+
+____________________________________________________________________________________________________________________
+
+git pull --no-rebase origin main
+
+    This command will pull changes from the main branch on the remote repository (origin) and merge them into your current branch, without rebasing.
+    
+    Explicitly tells Git to merge the remote main branch into your local main branch.
+
+    No, git pull --no-rebase origin main will not apply your local commits on top of the main commits in the sense of "reordering" them as rebase does.
+    Instead, it merges the changes from main into your current branch (check) and retains the existing history structure of your branch.
+
+____________________________________________________________________________________________________________________
+
+git pull origin main: 
+    Will either merge or rebase depending on your Git configuration (pull.rebase setting).
+
+____________________________________________________________________________________________________________________
+
+git cherry-pick </commit-hash/>
+
+    It is a powerful command that allows you to selectively apply a specific commit from one branch to another.
+
+    It's like picking a cherry from one tree and planting it in another.
+
+____________________________________________________________________________________________________________________
