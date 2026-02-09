@@ -430,3 +430,11 @@ git cherry-pick </commit-hash/>
     It's like picking a cherry from one tree and planting it in another.
 
 ____________________________________________________________________________________________________________________
+
+Change folder name in Git
+
+git mv old_folder_name new_folder_name
+git commit -m "Rename folder old_folder_name to new_folder_name"
+git push
+
+____________________________________________________________________________________________________________________
